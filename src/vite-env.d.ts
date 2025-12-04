@@ -1,1 +1,1 @@
-/ References to vite/client removed to resolve build errors.
+/// <reference types="vite/client" />
