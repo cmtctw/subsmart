@@ -86,6 +86,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ subscriptions, onEdit, onD
       setNotifySub(null);
   };
 
+  // 使用 any 雖然不推薦，但在這裡為了符合您的原始代碼保留，若要更嚴謹可定義 StatCardProps
   const StatCard = ({ title, value, subtext, icon: Icon, colorClass, gradientClass }: any) => (
       <div className={`relative overflow-hidden p-6 rounded-2xl border border-white/60 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white/70 backdrop-blur-md group`}>
           {/* Subtle Gradient Background */}
