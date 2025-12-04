@@ -3,16 +3,26 @@ import {
   addMonths, 
   addYears, 
   addWeeks, 
-  parseISO, 
   isBefore, 
-  startOfToday, 
   differenceInCalendarDays,
-  startOfMonth,
   endOfMonth,
-  isSameMonth,
-  setMonth,
-  setYear
+  isSameMonth
 } from 'date-fns';
+
+// Helper to replace date-fns parseISO
+const parseISO = (str: string) => new Date(str);
+
+// Helper to replace date-fns startOfToday
+const startOfToday = () => {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
+// Helper to replace date-fns startOfMonth
+const startOfMonth = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1);
+};
 
 export const getNextBillingDate = (sub: Subscription): Date => {
   if (!sub.firstBillDate) return new Date();
@@ -52,16 +62,19 @@ export const getBillDatesInMonth = (sub: Subscription, currentMonth: Date): Date
     if (!sub.active || !sub.firstBillDate) return [];
 
     const start = parseISO(sub.firstBillDate);
-    const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(currentMonth);
     const dates: Date[] = [];
 
     if (sub.billingCycle === BillingCycle.MONTHLY) {
         let date = start;
+        // Manual setYear
         if (date.getFullYear() < currentMonth.getFullYear()) {
-             date = setYear(date, currentMonth.getFullYear());
+             date = new Date(date);
+             date.setFullYear(currentMonth.getFullYear());
         }
-        date = setMonth(date, currentMonth.getMonth() - 1);
+        // Manual setMonth
+        date = new Date(date);
+        date.setMonth(currentMonth.getMonth() - 1);
         
         if (isBefore(date, start)) date = start;
 

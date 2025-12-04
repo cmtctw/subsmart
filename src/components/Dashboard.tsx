@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
-import { AlertCircle, DollarSign, TrendingUp, ExternalLink, Trash2, Edit2, CheckCircle, ArrowUpRight, Bell, Calendar as CalendarIcon, List as ListIcon, Copy, Mail, MessageCircle, PieChart as PieChartIcon, Sparkles } from 'lucide-react';
+import { DollarSign, TrendingUp, ExternalLink, Trash2, Edit2, CheckCircle, ArrowUpRight, Bell, Calendar as CalendarIcon, List as ListIcon, Copy, Mail, MessageCircle, PieChart as PieChartIcon, Sparkles } from 'lucide-react';
 import { BillingCycle, Subscription } from '../types';
 import { format } from 'date-fns';
 import { getNextBillingDate, getDaysRemaining, generateReminderMessage } from '../utils';
@@ -330,7 +330,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ subscriptions, onEdit, onD
                                 dataKey="value"
                                 stroke="none"
                             >
-                                {stats.pieData.map((entry, index) => (
+                                {stats.pieData.map((_, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className="drop-shadow-sm stroke-white stroke-2" />
                                 ))}
                             </Pie>
