@@ -19,11 +19,6 @@ const startOfToday = () => {
   return d;
 };
 
-// Helper to replace date-fns startOfMonth
-const startOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1);
-};
-
 export const getNextBillingDate = (sub: Subscription): Date => {
   if (!sub.firstBillDate) return new Date();
 
